@@ -59,7 +59,7 @@
                 </span>
             </div><!-- /input-group -->
       </div>
-
+      <?php for ($i = 0; $i < 6; $i++) : ?>
         <div class="col-sm-4 col-md-4">
             <div class="post">
                 <div class="post-img-content" style='height:150px;'>
@@ -78,6 +78,7 @@
                 </div>
             </div>
         </div>
+        <?php endfor; ?>
     </div>
 
  <div class='col-sm-12 col-md-12' style='margin-left:-14px;'>
