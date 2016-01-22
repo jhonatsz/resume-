@@ -7,6 +7,7 @@
   <link rel='stylesheet' type='text/css' href='<?=base_url();?>assets/css/jobs.css'>
   <script type='javascript' src='<?=base_url();?>assets/js/bootstrap.min.js'></script>
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <script type='javascript' src='<?=base_url();?>assets/js/bootstrap.min.js'></script>
 
 </head>
 <body>
@@ -55,7 +56,7 @@
 
       <div class="col-md-2 col-md-offset-2" style='margin-bottom:20px;margin-left:0px;'>
             <div class="input-group">
-                <button class="btn btn-default" type="submit" name="action"><span class="glyphicon glyphicon-plus"></span> Add Job</button>
+                <button class="btn btn-default" type="submit" name="action" onclick='alert('YEA');'><span class="glyphicon glyphicon-plus"></span>Add Job</button>
                 </span>
             </div><!-- /input-group -->
       </div>
