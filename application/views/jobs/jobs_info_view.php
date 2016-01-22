@@ -45,7 +45,7 @@
 </div>
 <!-- END OF NAV -->
     <div class='col-md-9'>
-      <div class="col-md-12 col-md-offset-2" style='margin-bottom:20px;margin-left:0px;'>
+      <div class="col-md-10 col-md-offset-2" style='margin-bottom:20px;margin-left:0px;'>
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search for..." id="searchTerm" name="searchTerm" value='' required>
                 <span class="input-group-btn">
@@ -54,12 +54,12 @@
             </div><!-- /input-group -->
       </div>
 
-      <!-- <div class="col-md-2 col-md-offset-2" style='margin-bottom:20px;margin-left:0px;'>
+      <div class="col-md-2 col-md-offset-2" style='margin-bottom:20px;margin-left:0px;'>
             <div class="input-group">
-                <button class="btn btn-default" type="submit" name="action" onclick='alert('YEA');'><span class="glyphicon glyphicon-plus"></span>Add Job</button>
+                <button class="btn btn-default" type="submit" name="action" onclick='alert('YEA');'><span class="glyphicon glyphicon-plus"></span>Apply Job</button>
                 </span>
             </div>
-      </div> -->
+      </div>
 
           <div class="col-md-12">
           <h4>Applicant List</h4>
