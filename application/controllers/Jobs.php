@@ -3,8 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jobs extends CI_Controller {
 
+	public function __construct(){
+
+		parent::__construct();
+		$this->load->model('Job_model');
+	}
 	public function index(){
-		$this->load->view('jobs/jobs_view');
+		$data['jobs_list'] = $this->Job_model->list_of_jobs('active')->result_array();
+
+		$this->load->view('jobs/jobs_view',$data);
 	}
 
   public function create(){

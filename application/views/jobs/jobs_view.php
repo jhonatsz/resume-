@@ -60,12 +60,12 @@
                 </span>
             </div><!-- /input-group -->
       </div>
-      <?php for ($i = 0; $i < 6; $i++) : ?>
+      <?php foreach ($jobs_list as $row) : ?>
         <div class="col-sm-4 col-md-4">
             <div class="post">
                 <div class="post-img-content" style='height:150px;'>
                     <img src="http://placehold.it/460x250/B42828/B42828&text=jQuery" class="img-responsive" />
-                    <span class="post-title"><b>Technical Staff</b><br />
+                    <span class="post-title"><b><?=$row['name'];?></b><br />
                         </span>
                 </div>
                 <div class="content" style="padding-top:0px;">
@@ -74,12 +74,12 @@
                         <time datetime="2014-01-20">January 20th, 2014</time>
                     </div>
                     <div>
-                        <a href="<?=base_url;?>index.php/jobs/info" class="btn btn-danger btn-sm"> Job Information</a>
+                        <a href="<?=base_url();?>index.php/jobs/info" class="btn btn-danger btn-sm"> Job Information</a>
                     </div>
                 </div>
             </div>
         </div>
-        <?php endfor; ?>
+      <?php endforeach; ?>
     </div>
 
  <div class='col-sm-12 col-md-12' style='margin-left:-14px;'>
