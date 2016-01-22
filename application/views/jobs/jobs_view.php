@@ -74,7 +74,7 @@
                         <time datetime="2014-01-20">January 20th, 2014</time>
                     </div>
                     <div>
-                        <a href="http://www.jquery2dotnet.com/2013/07/cool-social-sharing-button-using-css3.html" class="btn btn-danger btn-sm"> Job Information</a>
+                        <a href="<?=base_url;?>index.php/jobs/info" class="btn btn-danger btn-sm"> Job Information</a>
                     </div>
                 </div>
             </div>

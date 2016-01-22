@@ -12,6 +12,10 @@ class Jobs extends CI_Controller {
 		$this->load->view('jobs/jobs_create_view');
 	}
 
+	public function info(){
+		$this->load->view('jobs/jobs_info_view');
+	}
+
   public function jobs_list(){
 
 		$this->load->view('jobs/jobs_list_view');
