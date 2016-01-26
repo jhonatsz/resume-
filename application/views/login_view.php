@@ -13,19 +13,19 @@
                   <div class="panel-heading">
                       <span class="glyphicon glyphicon-lock"></span>Resume+ | Login</div>
                   <div class="panel-body">
-                      <form class="form-horizontal" role="form" action='<?=base_url();?>index.php/dashboard'>
+                      <form class="form-horizontal" role="form" method='post' action='<?=base_url();?>index.php/auth/login'>
                       <div class="form-group">
                           <label for="inputEmail3" class="col-sm-3 control-label">
                               Email</label>
                           <div class="col-sm-9">
-                              <input type="email" class="form-control" id="inputEmail3" placeholder="Email" required>
+                              <input type="email" name='email' class="form-control" id="inputEmail3" placeholder="Email" required>
                           </div>
                       </div>
                       <div class="form-group">
                           <label for="inputPassword3" class="col-sm-3 control-label">
                               Password</label>
                           <div class="col-sm-9">
-                              <input type="password" class="form-control" id="inputPassword3" placeholder="Password" required>
+                              <input type="password" name='password' class="form-control" id="inputPassword3" placeholder="Password" required>
                           </div>
                       </div>
                       <div class="form-group">

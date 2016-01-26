@@ -10,6 +10,7 @@ class Jobs extends CI_Controller {
 	}
 	public function index(){
 		$data['jobs_list'] = $this->Job_model->list_of_jobs('active')->result_array();
+		$data['type'] = $this->session->userdata('type');
 
 		$this->load->view('jobs/jobs_view',$data);
 	}
@@ -20,7 +21,13 @@ class Jobs extends CI_Controller {
 	}
 
 	public function info(){
-		$this->load->view('jobs/jobs_info_view');
+	  $jobId = $this->uri->segment(3);
+
+    $data['jobId'] = $jobId;
+		$data['appId'] = $this->session->userdata('id');
+		$data['type'] = $this->session->userdata('type');
+		$data['applicants'] =	$this->Job_model->get_job_applicants($jobId)->result_array();
+		$this->load->view('jobs/jobs_info_view',$data);
 	}
 
   public function jobs_list(){
@@ -32,8 +39,13 @@ class Jobs extends CI_Controller {
 		$this->load->view('jobs/applicant_list_view');
 	}
 
-	public function sort_ranks(){
+	public function apply_job(){
+		$jobId = $this->uri->segment(3);
+		$appId = $this->uri->segment(4);
 
+		$add_applicant = $this->Job_model->add_applicant($jobId,$appId);
+
+		header("Location:".base_url()."index.php/jobs/info/{$jobId}");
 	}
 
 }

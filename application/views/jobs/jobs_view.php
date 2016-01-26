@@ -54,12 +54,14 @@
             </div><!-- /input-group -->
       </div>
 
+      <?php if($type == 'hr'){?>
       <div class="col-md-2 col-md-offset-2" style='margin-bottom:20px;margin-left:0px;'>
             <div class="input-group">
                 <button class="btn btn-default" type="submit" name="action" onclick='alert('YEA');'><span class="glyphicon glyphicon-plus"></span>Add Job</button>
                 </span>
             </div><!-- /input-group -->
       </div>
+      <?php } ?>
       <?php foreach ($jobs_list as $row) : ?>
         <div class="col-sm-4 col-md-4">
             <div class="post">
@@ -71,10 +73,10 @@
                 <div class="content" style="padding-top:0px;">
                     <div class="author">
                         By <b>HR Dept</b> |
-                        <time datetime="2014-01-20">January 20th, 2014</time>
+                        <time datetime="2014-01-20"><?=$row['date_created'];?></time>
                     </div>
-                    <div>
-                        <a href="<?=base_url();?>index.php/jobs/info" class="btn btn-danger btn-sm"> Job Information</a>
+                    <div>"
+                        <a href="<?=base_url();?>index.php/jobs/info/<?=$row['id'];?>" class="btn btn-danger btn-sm"> Job Information</a>
                     </div>
                 </div>
             </div>

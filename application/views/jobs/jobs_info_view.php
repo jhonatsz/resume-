@@ -54,13 +54,18 @@
             </div><!-- /input-group -->
       </div>
 
+      <?php if($type == 'applicant') { ?>
+      <!--  -->
       <div class="col-md-2 col-md-offset-2" style='margin-bottom:20px;margin-left:0px;'>
             <div class="input-group">
-                <button class="btn btn-default" type="submit" name="action" onclick='alert('YEA');'><span class="glyphicon glyphicon-plus"></span>Apply Job</button>
+                <form method='post' action="<?=base_url();?>index.php/jobs/apply_job/<?=$jobId;?>/<?=$appId;?>">
+                 <button class="btn btn-default" type="submit" name="action"><span class="glyphicon glyphicon-plus"></span>Apply Job</button>
+                </form>
                 </span>
             </div>
       </div>
-
+      <!-- </div> -->
+      <?php } ?>
           <div class="col-md-12">
           <h4>Applicant List</h4>
           <div class="table-responsive">
@@ -73,84 +78,36 @@
                      <th><input type="checkbox" id="checkall" /></th>
                      <th>First Name</th>
                       <th>Last Name</th>
-                       <th>Address</th>
+                       <!-- <th>Address</th> -->
                        <th>Email</th>
                        <th>Contact</th>
-                        <th>Edit</th>
-
-                         <th>Delete</th>
+                       <?php if($type == 'hr') {?>
+                         <th>Download</th>
+                       <?php } ?>
                      </thead>
       <tbody>
 
+      <?php foreach($applicants as $row) :?>
       <tr>
       <td><input type="checkbox" class="checkthis" /></td>
-      <td>Mohsin</td>
-      <td>Irshad</td>
-      <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-      <td>isometric.mohsin@gmail.com</td>
-      <td>+923335586757</td>
-      <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-      <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+      <td><?=$row['fullname'];?></td>
+      <td><?=$row['lastname'];?></td>
+      <!-- <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td> -->
+      <td><?=$row['email'];?></td>
+      <td><?=$row['contact_no'];?></td>
+
+      <?php if($type == 'hr') {?>
+      <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-primary btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+      <?php } ?>
       </tr>
-
-   <tr>
-      <td><input type="checkbox" class="checkthis" /></td>
-      <td>Mohsin</td>
-      <td>Irshad</td>
-      <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-      <td>isometric.mohsin@gmail.com</td>
-      <td>+923335586757</td>
-      <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-      <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-      </tr>
-
-
-   <tr>
-      <td><input type="checkbox" class="checkthis" /></td>
-      <td>Mohsin</td>
-      <td>Irshad</td>
-      <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-      <td>isometric.mohsin@gmail.com</td>
-      <td>+923335586757</td>
-      <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-      <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-      </tr>
-
-
-
-   <tr>
-      <td><input type="checkbox" class="checkthis" /></td>
-      <td>Mohsin</td>
-      <td>Irshad</td>
-      <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-      <td>isometric.mohsin@gmail.com</td>
-      <td>+923335586757</td>
-      <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-      <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-      </tr>
-
-
-   <tr>
-      <td><input type="checkbox" class="checkthis" /></td>
-      <td>Mohsin</td>
-      <td>Irshad</td>
-      <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-      <td>isometric.mohsin@gmail.com</td>
-      <td>+923335586757</td>
-      <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-      <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
-      </tr>
-
-
-
-
-
+      <?php endforeach; ?>
       </tbody>
 
   </table>
     </div>
 
- <div class='col-sm-12 col-md-12' style='margin-left:-14px;'>
+
+ <!-- <div class='col-sm-12 col-md-12' style='margin-left:-14px;'>
   <div class="clearfix"></div>
   <ul class="pagination pull-right">
     <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
@@ -166,7 +123,7 @@
 
           </div>
    </div>
-  </div>
+  </div> -->
 
 
 </div>
