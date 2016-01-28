@@ -6,7 +6,7 @@
   <link rel='stylesheet' type='text/css' href='<?=base_url();?>assets/css/nav.css'>
   <link rel='stylesheet' type='text/css' href='<?=base_url();?>assets/css/jobs.css'>
   <script type='javascript' src='<?=base_url();?>assets/js/bootstrap.min.js'></script>
-  <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <script type='javascript' src='<?=base_url();?>assets/js/bootstrap.min.js'></script>
 
 </head>
@@ -59,12 +59,10 @@
       </form>
       <?php if($type == 'hr'){?>
       <div class="col-md-2 col-md-offset-2" style='margin-bottom:20px;margin-left:0px;'>
-			<form method='post' action='<?=base_url();?>index.php/jobs/create'>
             <div class="input-group">
-                <button class="btn btn-default" type="submit" name="action"><span class="glyphicon glyphicon-plus"></span>Add Job</button>
+                <button class="btn btn-default" type="submit" name="action" onclick='alert('YEA');'><span class="glyphicon glyphicon-plus"></span>Add Job</button>
                 </span>
             </div><!-- /input-group -->
-			</form>
       </div>
       <?php } ?>
       <?php foreach ($jobs_list as $row) : ?>
@@ -80,7 +78,7 @@
                         By <b>HR Dept</b> |
                         <time datetime="2014-01-20"><?=$row['date_created'];?></time>
                     </div>
-                    <div>
+                    <div>"
                         <a href="<?=base_url();?>index.php/jobs/info/<?=$row['id'];?>" class="btn btn-danger btn-sm"> Job Information</a>
                     </div>
                 </div>

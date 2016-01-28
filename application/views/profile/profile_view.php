@@ -32,8 +32,8 @@
                   <a href="#"><i class="fa fa-globe fa-lg"></i>Profile</a>
                 </li>
                 <li>
-                  <a href="<?=base_url();?>index.php/settings">
-                  <i class="fa fa-users fa-lg"></i> Settings
+                  <a href="<?=base_url();?>index.php/auth/logout">
+                  <i class="fa fa-users fa-lg"></i> Logout
                   </a>
                 </li>
             </ul>
@@ -47,58 +47,38 @@
       <div class="row"><br/><br/>
         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2 toppad" >
 
-
+          <?php foreach($user_info as $row ): ?>
           <div class="panel panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title">Jhonathan Howard Falcutela</h3>
+              <h3 class="panel-title"><?=$row['fullname']; ?> <?=$row['lastname']; ?></h3>
             </div>
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
 
-                <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
-                  <dl>
-                    <dt>DEPARTMENT:</dt>
-                    <dd>Administrator</dd>
-                    <dt>HIRE DATE</dt>
-                    <dd>11/12/2013</dd>
-                    <dt>DATE OF BIRTH</dt>
-                       <dd>11/12/2013</dd>
-                    <dt>GENDER</dt>
-                    <dd>Male</dd>
-                  </dl>
-                </div>-->
                 <div class=" col-md-9 col-lg-9 ">
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
-                        <td>Department:</td>
-                        <td>Programming</td>
-                      </tr>
-                      <tr>
-                        <td>Hire date:</td>
-                        <td>06/23/2013</td>
-                      </tr>
-                      <tr>
                         <td>Date of Birth</td>
-                        <td>01/24/1988</td>
+                        <td><?=$row['birthday']?></td>
                       </tr>
 
                          <tr>
                              <tr>
                         <td>Gender</td>
-                        <td>Male</td>
+                        <td><?=$row['gender']?></td>
                       </tr>
                         <tr>
                         <td>Home Address</td>
-                        <td>Metro Manila,Philippines</td>
+                        <td><?=$row['address']?></td>
                       </tr>
                       <tr>
                         <td>Email</td>
-                        <td><a href="mailto:info@support.com">info@support.com</a></td>
+                        <td><a href="mailto:info@support.com"><?=$row['email']?></a></td>
                       </tr>
-                        <td>Phone Number</td>
-                        <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)
+                        <td>Contact Number</td>
+                        <td><?=$row['contact_no']?>
                         </td>
 
                       </tr>
@@ -106,7 +86,7 @@
                     </tbody>
                   </table>
 
-                  <a href="#" class="btn btn-danger" style='margin-left:364px;'>Edit Profile</a>
+                  <a href="<?=base_url()?>index.php/profile/edit/<?=$user_id;?>" class="btn btn-danger" style='margin-left:364px;'>Edit Profile</a>
                   <!-- <a href="#" class="btn btn-primary">Team Sales Performance</a> -->
                 </div>
               </div>
@@ -115,17 +95,17 @@
                       <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-default">
                       Qualifications
                       </a>
-                      <span class="pull-right">
-                          <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-plus"></i></a>
-                          <!-- <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a> -->
-                      </span>
+                    
                       <div class='row'>
                           <ul>
-                            <li> Microsoft Tools Proficient</li>
-                            <li> Microsoft Tools Proficient</li>
-                            <li> Microsoft Tools Proficient</li>
-                            <li> Microsoft Tools Proficient</li>
-                            <li> Microsoft Tools Proficient</li>
+                            <?php
+                              $qualifications = explode(',',$row['qualification']);
+                              foreach($qualifications as $q):
+                              $i=0;
+                            ?>
+                            <li><?=$q?></li>
+
+                          <?php $i++; endforeach; ?>
                           </ul>
                       </div>
                   </div>
@@ -134,17 +114,17 @@
                        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-default">
                        Skills
                        </a>
-                       <span class="pull-right">
-                           <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-plus"></i></a>
-                           <!-- <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>-->
-                       </span>
+                      
                        <div class='row'>
                            <ul>
-                             <li> Java</li>
-                             <li> PHP</li>
-                             <li> Javascript</li>
-                             <li> Android</li>
-                             <li> Pythont</li>
+                             <?php
+                               $skills = explode(',',$row['skills']);
+                               foreach($skills as $s):
+                               $i=0;
+                             ?>
+                             <li><?=$s; ?></li>
+
+                           <?php $i++; endforeach; ?>
                            </ul>
                        </div>
 
@@ -154,18 +134,22 @@
                         <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-default">
                         Achievements
                         </a>
-                        <span class="pull-right">
-                            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-plus"></i></a>
-                            <!-- <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>-->
-                        </span>
-
+                        
                         <div class='row'>
                             <ul>
-                              <li> 2014 DLSU Global Techday Speaker</li>
+                              <?php
+                                $achievements = explode(',',$row['achievements']);
+                                foreach($achievements as $a):
+                                $i=0;
+                              ?>
+                              <li><?=$a?></li>
+
+                            <?php $i++; endforeach; ?>
                             </ul>
                         </div>
                     </div>
           </div>
+        <?php endforeach; ?>
         </div>
       </div>
     </div>

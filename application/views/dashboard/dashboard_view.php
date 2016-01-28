@@ -17,21 +17,21 @@
 
             <ul id="menu-content" class="menu-content collapse out">
                 <li class='active'>
-                  <a href="#" >
+                  <a href="<?=base_url();?>index.php/dashboard" >
                   <i class="fa fa-dashboard fa-lg"></i> Dashboard
                   </a>
                 </li>
 
                 <li>
-                  <a href="<?=base_url();?>index.php/jobs"><i class="fa fa-gift fa-lg"></i> Jobs List</a>
+                  <a href="<?=base_url();?>index.php/jobs"><i class="fa fa-gift fa-lg"></i> Jobs</a>
                 </li>
 
                 <li>
                   <a href="<?=base_url();?>index.php/profile"><i class="fa fa-globe fa-lg"></i>Profile</a>
                 </li>
                 <li>
-                  <a href="<?=base_url();?>index.php/settings">
-                  <i class="fa fa-users fa-lg"></i> Settings
+                  <a href="<?=base_url();?>index.php/auth/logout">
+                  <i class="fa fa-users fa-lg"></i> Logout
                   </a>
                 </li>
             </ul>

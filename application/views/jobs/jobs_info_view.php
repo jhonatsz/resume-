@@ -6,7 +6,7 @@
   <link rel='stylesheet' type='text/css' href='<?=base_url();?>assets/css/nav.css'>
   <link rel='stylesheet' type='text/css' href='<?=base_url();?>assets/css/jobs.css'>
   <script type='javascript' src='<?=base_url();?>assets/js/bootstrap.min.js'></script>
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
   <script type='javascript' src='<?=base_url();?>assets/js/bootstrap.min.js'></script>
 
 </head>
@@ -27,15 +27,15 @@
                 </li>
 
                 <li class='active'>
-                  <a href="#"><i class="fa fa-gift fa-lg"></i> Jobs</a>
+                  <a href="<?=base_url();?>index.php/jobs"><i class="fa fa-gift fa-lg"></i> Jobs</a>
                 </li>
 
                 <li>
                   <a href="<?=base_url();?>index.php/profile"><i class="fa fa-globe fa-lg"></i>Profile</a>
                 </li>
                 <li>
-                  <a href="<?=base_url();?>index.php/settings">
-                  <i class="fa fa-users fa-lg"></i> Settings
+                  <a href="<?=base_url();?>index.php/auth/logout">
+                  <i class="fa fa-users fa-lg"></i> Signout
                   </a>
                 </li>
             </ul>
@@ -43,8 +43,97 @@
 </div>
 </div>
 </div>
+<div class='col-md-9'>
+<!-- Job Info -->
+
+<?php foreach($job_info as $row ): ?>
+<div class='col-md-12'>
+  <div class="container">
+      <div class="row">
+        <div class="col-md-10" >
+
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title"><b>Job Title: </b><?=$row['name']?></h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="Job Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+
+                <div class=" col-md-9 col-lg-9 ">
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td><b>Description</b></td>
+                        <td><?=$row['description'];?></td>
+                      </tr>
+					  <tr>
+                        <td><b>Status</b></td>
+                        <td><?=ucfirst($row['status']);?></td>
+                      </tr>
+                    </tbody>
+                  </table>
+				  
+				  <a href="#" class="btn btn-primary" style='margin-left:364px;float:right;margin-bottom:10px;'>Total Applicants : <?=count($applicants);?></a>
+				 </br>
+				 <?php if($type == 'applicant') { ?>
+				 <form method='post' action="<?=base_url();?>index.php/jobs/apply_job/<?=$jobId;?>/<?=$appId;?>">
+				  <button class="btn btn-default" type="submit" style='margin-left:364px;float:right' name="action"><span class="glyphicon glyphicon-plus"></span> Apply Job</button>
+				  <!--<a href="#" class="btn btn-primary" style='margin-left:364px;float:right'>Appy Job</a>-->
+				 </form>
+				 <?php } ?>
+				  <?php if($type == 'hr') {?>
+                  <a href="<?=base_url();?>index.php/jobs/info/<?=$jobId;?>/edit" class="btn btn-danger" style='margin-left:364px;float:right'>Edit Job</a>
+				  <?php } ?>
+                  <!-- <a href="#" class="btn btn-primary">Team Sales Performance</a> -->
+                </div>
+              </div>
+            </div>
+                 <div class="panel-footer">
+                      <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-default">
+                      Qualifications
+                      </a>
+                      
+                      <div class='row'>
+                          <ul>
+						    <?php
+							$qualifications = explode(',',$row['qualifications']);
+							for($i=0;$i<count($qualifications);$i++){
+							?>
+                            <li><?=$qualifications[$i];?></li>
+							<?php } ?>
+                          </ul>
+                      </div>
+                  </div>
+
+                  <div class="panel-footer">
+                       <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-default">
+                       Skills
+                       </a>
+					   
+                       <div class='row'>
+                           <ul>
+							<?php
+								$skills = explode(',',$row['skills']);
+								for($i=0;$i<count($skills);$i++){
+								?>
+								<li><?=$skills[$i];?></li>
+							<?php } ?>
+                           </ul>
+                       </div>
+
+                   </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<?php endforeach; ?>
+<!-- END -->
+
+<?php if($type == 'hr') { ?>
 <!-- END OF NAV -->
-    <div class='col-md-9'>
+    <div class='col-md-12'>
       <div class="col-md-10 col-md-offset-2" style='margin-bottom:20px;margin-left:0px;'>
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search for..." id="searchTerm" name="searchTerm" value='' required>
@@ -54,18 +143,18 @@
             </div><!-- /input-group -->
       </div>
 
-      <?php if($type == 'applicant') { ?>
+
       <!--  -->
-      <div class="col-md-2 col-md-offset-2" style='margin-bottom:20px;margin-left:0px;'>
+      <!-- <div class="col-md-2 col-md-offset-2" style='margin-bottom:20px;margin-left:0px;'>
             <div class="input-group">
                 <form method='post' action="<?=base_url();?>index.php/jobs/apply_job/<?=$jobId;?>/<?=$appId;?>">
                  <button class="btn btn-default" type="submit" name="action"><span class="glyphicon glyphicon-plus"></span>Apply Job</button>
                 </form>
                 </span>
             </div>
-      </div>
+      </div> -->
       <!-- </div> -->
-      <?php } ?>
+
           <div class="col-md-12">
           <h4>Applicant List</h4>
           <div class="table-responsive">
@@ -76,9 +165,9 @@
                      <thead>
 
                      <th><input type="checkbox" id="checkall" /></th>
+                     <th>Rankings</th>
                      <th>First Name</th>
                       <th>Last Name</th>
-                       <!-- <th>Address</th> -->
                        <th>Email</th>
                        <th>Contact</th>
                        <?php if($type == 'hr') {?>
@@ -88,8 +177,58 @@
       <tbody>
 
       <?php foreach($applicants as $row) :?>
+
       <tr>
       <td><input type="checkbox" class="checkthis" /></td>
+      <td>
+      <?php
+        $jT = count(explode(',',$row['JQ'])) + count(explode(',',$row['JS']));
+        $qualification = explode(',',$row['UQ']);
+        $skills = explode(',',$row['US']);
+        $aT = 0;
+
+        foreach($qualification as $uq){
+            $i=0;
+			if(!empty($uq)) {
+				$result = $this->Job_model->match_maker($jobId,'Q',$uq)->result_array();
+				$i++;
+				
+				if(count($result) > 0){
+				  $aT++;
+				}
+			}
+        }
+
+        foreach($skills as $us){
+          $i=0;
+		  if(!empty($us)) {
+			  $result = $this->Job_model->match_maker($jobId,'S',$us)->result_array();
+			  $i++;
+			  //echo (count($result));
+			  if(count($result) > 0){
+				$aT++;
+			  }
+		  }
+          
+        }
+		
+        $percentage_rank = $aT / $jT * 100 .' %';
+
+        if($percentage_rank >= 70){
+          echo "<b><span style='color:green;'>";
+        }
+        if($percentage_rank >= 40 && $percentage_rank <= 69){
+          echo "<b><span style='color:#d35400;'>";
+        }
+        if($percentage_rank <= 39){
+          echo "<b><span style='color:red;'>";
+        }
+		
+        echo round($percentage_rank,1).'%';
+        echo '</span></b>';
+
+       ?>
+      </td>
       <td><?=$row['fullname'];?></td>
       <td><?=$row['lastname'];?></td>
       <!-- <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td> -->
@@ -97,7 +236,7 @@
       <td><?=$row['contact_no'];?></td>
 
       <?php if($type == 'hr') {?>
-      <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-primary btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+      <td><p data-placement="top" data-toggle="tooltip" title="Download PDF"><button class="btn btn-primary btn-xs" data-title="Download PDF" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-arrow-down"></span></button></p></td>
       <?php } ?>
       </tr>
       <?php endforeach; ?>
@@ -128,7 +267,7 @@
 
 </div>
 </div>
-
-
+  <?php } ?>
+</div>
 </body>
 </html>
