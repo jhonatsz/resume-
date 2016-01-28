@@ -134,7 +134,7 @@
                         <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-default">
                         Achievements
                         </a>
-                        
+                        <!-- -->
                         <div class='row'>
                             <ul>
                               <?php
