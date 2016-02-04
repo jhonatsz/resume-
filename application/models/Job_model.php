@@ -37,7 +37,7 @@ class Job_model extends CI_Model {
 	}
 
     function get_job_applicants($jobId=NULL){
-      $applicants = $this->db->query("SELECT users_profile.fullname, users_profile.lastname,users.email,users_profile.contact_no,users_profile.qualification as UQ,users_profile.skills as US,jobs.qualifications as JQ,jobs.skills as JS FROM jobs_info LEFT JOIN users on users.id=jobs_info.applicant_id LEFT JOIN users_profile on users.id=users_profile.id LEFT JOIN jobs on jobs.id=jobs_info.jobs_id
+      $applicants = $this->db->query("SELECT users_profile.id, users_profile.fullname, users_profile.lastname,users.email,users_profile.contact_no,users_profile.qualification as UQ,users_profile.skills as US,jobs.qualifications as JQ,jobs.skills as JS FROM jobs_info LEFT JOIN users on users.id=jobs_info.applicant_id LEFT JOIN users_profile on users.id=users_profile.id LEFT JOIN jobs on jobs.id=jobs_info.jobs_id
         WHERE jobs_id='{$jobId}'");
 
       return $applicants;

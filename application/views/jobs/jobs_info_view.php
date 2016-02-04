@@ -184,7 +184,7 @@
                        <th>Email</th>
                        <th>Contact</th>
                        <?php if($type == 'hr') {?>
-                         <th>Download</th>
+                         <th colspan=2>Action</th>
                        <?php } ?>
                      </thead>
       <tbody>
@@ -249,7 +249,11 @@
       <td><?=$row['contact_no'];?></td>
 
       <?php if($type == 'hr') {?>
-      <td><p data-placement="top" data-toggle="tooltip" title="Download PDF"><button class="btn btn-primary btn-xs" data-title="Download PDF" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-arrow-down"></span></button></p></td>
+      <td>
+        <p data-placement="top" data-toggle="tooltip" title="Download PDF"><a target='_tab' href='<?=base_url();?>index.php/jobs/view/<?=$jobId;?>/<?=$row['id'];?>'> <button class="btn btn-primary btn-xs" data-title="Download PDF" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-eye-open"></span></button></a></p>
+      </td>
+      <td><p data-placement="top" data-toggle="tooltip" title="View PDF"><a href='<?=base_url();?>index.php/jobs/download/<?=$jobId;?>/<?=$row['id'];?>'> <button class="btn btn-primary btn-xs" data-title="View PDF" data-toggle="modal" data-target="#delete" ><span class=" glyphicon glyphicon-download-alt"></span></button></a></p></td>
+
       <?php } ?>
       </tr>
       <?php endforeach; ?>

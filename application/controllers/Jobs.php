@@ -7,7 +7,9 @@ class Jobs extends CI_Controller {
 
 		parent::__construct();
 		$this->load->model('Job_model');
+		$this->load->model('Profile_model');
 		$this->load->library('Pagination');
+		$this->load->library('fpdf_gen');
 	}
 	public function index(){
 		$start=0;
@@ -151,6 +153,237 @@ class Jobs extends CI_Controller {
 			$this->load->view('jobs/jobs_info_view',$data);
 		}
 
+	}
+
+	public function download(){
+		$jobId= $this->uri->segment(3);
+		$appId = $this->uri->segment(4);
+
+		$jobName = $this->Job_model->get_job_info($jobId)->result_array();
+		$jName= $jobName['0']['name'];
+		$appInfo = $this->Profile_model->user_profile($appId)->result_array();
+
+		$img_name=!empty($appInfo['0']['img_name'])? $appInfo['0']['img_name'] : 'no_images.jpeg' ;
+		$name = $appInfo['0']['fullname'] .' '. $appInfo['0']['lastname'];
+		//print_r($appInfo);
+		// Logo
+		$this->fpdf->Image('assets/img/profiles/'.$img_name.'',10,13,30);
+		// Arial bold 15
+		$this->fpdf->SetFont('Arial','B',15);
+		// Move to the right
+		$this->fpdf->Cell(80);
+
+		// Title
+		// Select Arial bold 15
+		$this->fpdf->SetFont('Arial','B',18);
+		// Move to the right
+		//$this->fpdf->Cell(100);
+		// Framed title
+		$this->fpdf->SetTextColor(192,57,43);
+		$this->fpdf->Cell(30,10,$jName.' Job Application',0,0,'C');
+		// Line break
+		$this->fpdf->Ln(12);
+
+		// Applicant Name
+		// Select Arial bold 15
+		$this->fpdf->SetTextColor(0,0,0);
+		$this->fpdf->SetFont('Arial','B',16);
+		// Move to the right
+		//$this->fpdf->Cell(100);
+		// Framed title
+		$this->fpdf->Cell(163,10,$name,0,0,'C');
+		// Line break
+		$this->fpdf->Ln(25);
+
+		// Chapter Title
+		// Arial 12
+		$this->fpdf->SetFont('Arial','',12);
+		// Background color
+		$this->fpdf->SetFillColor(200,220,255);
+		// Title
+		$this->fpdf->Cell(0,6,"Applicant Information:",0,1,'L',true);
+		// Line break
+		$this->fpdf->Ln(1);
+
+
+
+		$this->fpdf->SetFont('Times','',12);
+		foreach($appInfo as $row)
+			$this->fpdf->Cell(0,6,'Applicant Name: '.$row['fullname'].' '.$row['lastname'],0,1);
+			$this->fpdf->Cell(0,6,'Birthday: '.$row['birthday'],0,1);
+			$this->fpdf->Cell(0,6,'Gender: '.$row['gender'],0,1);
+			$this->fpdf->Cell(0,6,'Home Address: '.$row['address'],0,1);
+			$this->fpdf->Cell(0,6,'Email: '.$row['email'],0,1);
+			$this->fpdf->Cell(0,6,'Contact No: '.$row['contact_no'],0,1);
+		// for($i=0;$i<=count($appInfo);$i++)
+		// 		$this->fpdf->Cell(0,6,'Fullname: Jhonathan '.$i,0,1);
+
+		// Chapter Title
+		// Arial 12
+		$this->fpdf->SetFont('Arial','',12);
+		// Background color
+		$this->fpdf->SetFillColor(200,220,255);
+		// Title
+		$this->fpdf->Cell(0,6,"Qualifications:",0,1,'L',true);
+		// Line break
+		$this->fpdf->Ln(1);
+
+		$this->fpdf->SetFont('Times','',12);
+		foreach($appInfo as $qrow)
+			$q = explode(',',$qrow['qualification']);
+			foreach($q as $qrow)
+				$this->fpdf->Cell(0,6,'* '.$qrow,0,1);
+
+		// Chapter Title
+		// Arial 12
+		$this->fpdf->SetFont('Arial','',12);
+		// Background color
+		$this->fpdf->SetFillColor(200,220,255);
+		// Title
+		$this->fpdf->Cell(0,6,"Skills:",0,1,'L',true);
+		// Line break
+		$this->fpdf->Ln(1);
+
+		$this->fpdf->SetFont('Times','',12);
+		foreach($appInfo as $srow)
+			$s = explode(',',$srow['skills']);
+			foreach($s as $srow)
+				$this->fpdf->Cell(0,6,'* '.$srow,0,1);
+
+		// Chapter Title
+		// Arial 12
+		$this->fpdf->SetFont('Arial','',12);
+		// Background color
+		$this->fpdf->SetFillColor(200,220,255);
+		// Title
+		$this->fpdf->Cell(0,6,"Achievements:",0,1,'L',true);
+		// Line break
+		$this->fpdf->Ln(1);
+
+		$this->fpdf->SetFont('Times','',12);
+		foreach($appInfo as $arow)
+			$a = explode(',',$arow['skills']);
+			foreach($a as $arow)
+				$this->fpdf->Cell(0,6,'* '.$arow,0,1);
+
+
+		echo $this->fpdf->Output('resume.pdf','D');
+	}
+
+
+	public function view(){
+		$jobId= $this->uri->segment(3);
+		$appId = $this->uri->segment(4);
+
+		$jobName = $this->Job_model->get_job_info($jobId)->result_array();
+		$jName= $jobName['0']['name'];
+		$appInfo = $this->Profile_model->user_profile($appId)->result_array();
+
+		$img_name=!empty($appInfo['0']['img_name'])? $appInfo['0']['img_name'] : 'no_images.jpeg' ;
+		$name = $appInfo['0']['fullname'] .' '. $appInfo['0']['lastname'];
+		//print_r($appInfo);
+		// Logo
+		$this->fpdf->Image('assets/img/profiles/'.$img_name.'',10,13,30);
+		// Arial bold 15
+		$this->fpdf->SetFont('Arial','B',15);
+		// Move to the right
+		$this->fpdf->Cell(80);
+
+		// Title
+		// Select Arial bold 15
+		$this->fpdf->SetFont('Arial','B',18);
+		// Move to the right
+		//$this->fpdf->Cell(100);
+		// Framed title
+		$this->fpdf->SetTextColor(192,57,43);
+		$this->fpdf->Cell(30,10,$jName.' Job Application',0,0,'C');
+		// Line break
+		$this->fpdf->Ln(12);
+
+		// Applicant Name
+		// Select Arial bold 15
+		$this->fpdf->SetTextColor(0,0,0);
+		$this->fpdf->SetFont('Arial','B',16);
+		// Move to the right
+		//$this->fpdf->Cell(100);
+		// Framed title
+		$this->fpdf->Cell(163,10,$name,0,0,'C');
+		// Line break
+		$this->fpdf->Ln(25);
+
+		// Chapter Title
+		// Arial 12
+		$this->fpdf->SetFont('Arial','',12);
+		// Background color
+		$this->fpdf->SetFillColor(200,220,255);
+		// Title
+		$this->fpdf->Cell(0,6,"Applicant Information:",0,1,'L',true);
+		// Line break
+		$this->fpdf->Ln(1);
+
+
+
+		$this->fpdf->SetFont('Times','',12);
+		foreach($appInfo as $row)
+			$this->fpdf->Cell(0,6,'Applicant Name: '.$row['fullname'].' '.$row['lastname'],0,1);
+			$this->fpdf->Cell(0,6,'Birthday: '.$row['birthday'],0,1);
+			$this->fpdf->Cell(0,6,'Gender: '.$row['gender'],0,1);
+			$this->fpdf->Cell(0,6,'Home Address: '.$row['address'],0,1);
+			$this->fpdf->Cell(0,6,'Email: '.$row['email'],0,1);
+			$this->fpdf->Cell(0,6,'Contact No: '.$row['contact_no'],0,1);
+		// for($i=0;$i<=count($appInfo);$i++)
+		// 		$this->fpdf->Cell(0,6,'Fullname: Jhonathan '.$i,0,1);
+
+		// Chapter Title
+		// Arial 12
+		$this->fpdf->SetFont('Arial','',12);
+		// Background color
+		$this->fpdf->SetFillColor(200,220,255);
+		// Title
+		$this->fpdf->Cell(0,6,"Qualifications:",0,1,'L',true);
+		// Line break
+		$this->fpdf->Ln(1);
+
+		$this->fpdf->SetFont('Times','',12);
+		foreach($appInfo as $qrow)
+			$q = explode(',',$qrow['qualification']);
+			foreach($q as $qrow)
+				$this->fpdf->Cell(0,6,'* '.$qrow,0,1);
+
+		// Chapter Title
+		// Arial 12
+		$this->fpdf->SetFont('Arial','',12);
+		// Background color
+		$this->fpdf->SetFillColor(200,220,255);
+		// Title
+		$this->fpdf->Cell(0,6,"Skills:",0,1,'L',true);
+		// Line break
+		$this->fpdf->Ln(1);
+
+		$this->fpdf->SetFont('Times','',12);
+		foreach($appInfo as $srow)
+			$s = explode(',',$srow['skills']);
+			foreach($s as $srow)
+				$this->fpdf->Cell(0,6,'* '.$srow,0,1);
+
+		// Chapter Title
+		// Arial 12
+		$this->fpdf->SetFont('Arial','',12);
+		// Background color
+		$this->fpdf->SetFillColor(200,220,255);
+		// Title
+		$this->fpdf->Cell(0,6,"Achievements:",0,1,'L',true);
+		// Line break
+		$this->fpdf->Ln(1);
+
+		$this->fpdf->SetFont('Times','',12);
+		foreach($appInfo as $arow)
+			$a = explode(',',$arow['skills']);
+			foreach($a as $arow)
+				$this->fpdf->Cell(0,6,'* '.$arow,0,1);
+
+
+		echo $this->fpdf->Output();
 	}
 
   public function jobs_list(){
