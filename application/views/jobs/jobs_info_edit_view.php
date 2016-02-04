@@ -68,7 +68,7 @@
                 <textarea class="form-control" id="message" name="description" placeholder="Please enter your message here..." rows="5"><?=$row['description'];?></textarea>
               </div>
             </div>
-			
+
             <!-- Q body -->
             <div class="form-group">
               <label class="col-md-3 control-label" for="message">Qualifications</label>
@@ -76,12 +76,20 @@
                 <textarea class="form-control" id="message" name="qualifications" placeholder="Please enter your message here..." rows="5"><?=$row['qualifications'];?></textarea>
               </div>
             </div>
-			
+
 			            <!-- Q body -->
             <div class="form-group">
               <label class="col-md-3 control-label" for="message">Skills</label>
               <div class="col-md-9">
                 <textarea class="form-control" id="message" name="skills" placeholder="Please enter your message here..." rows="5"><?=$row['skills'];?></textarea>
+              </div>
+            </div>
+
+            <!-- Name input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">Max Number</label>
+              <div class="col-md-9">
+                <input id="name" name="units" type="text" placeholder="Your name" value='<?=$row['units'];?>' class="form-control">
               </div>
             </div>
 

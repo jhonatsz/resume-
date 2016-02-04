@@ -5,26 +5,32 @@ class Job_model extends CI_Model {
     {
         parent::__construct();
     }
-	
+
+  function check_if_exist($jobId=NULL,$appId=NULL){
+      $result=$this->db->query("SELECT * FROM jobs_info WHERE jobs_id='$jobId' AND applicant_id='$appId'")->num_rows();
+      return $result;
+  }
+
 	function newJob($name=NULL,$description=NULL,$qualifications=NULL,$skills=NULL){
 		$newJob = $this->db->query("INSERT into jobs(name,description,qualifications,skills) VALUES('$name','$description','$qualifications','$skills')");
       return $newJob;
 	}
-	function updateJob($jobId=NULL,$name=NULL,$description=NULL,$qualifications=NULL,$skills=NULL){
-		$result = $this->db->query("UPDATE jobs SET name='$name',description='$description',qualifications='$qualifications',skills='$skills' WHERE id='$jobId'");
-		
+	function updateJob($jobId=NULL,$name=NULL,$description=NULL,$qualifications=NULL,$skills=NULL,$units=NULL){
+		$result = $this->db->query("UPDATE jobs SET name='$name',description='$description',qualifications='$qualifications',skills='$skills',units='$units' WHERE id='$jobId'");
+
 		return $result;
 	}
-	
+
 	function get_job_info($jobId){
-	$result = $this->db->query("SELECT * FROM JOBS WHERE id='$jobId'");
+	$result = $this->db->query("SELECT * FROM jobs WHERE id='$jobId'");
 		return $result;
 	}
-    function list_of_jobs($status=NULL){
-      $joblist = $this->db->query("SELECT * FROM jobs where STATUS='active' LIMIT 9");
+
+  function list_of_jobs($status=NULL,$condition=NULL){
+      $joblist = $this->db->query("SELECT * FROM jobs where STATUS='active' $condition ");
       return $joblist;
     }
-	
+
 	function deleteJob($id=NULL){
 		$result = $this->db->query("DELETE FROM jobs WHERE id='$id'");
 		return $result;

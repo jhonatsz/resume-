@@ -54,7 +54,7 @@
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="<?=base_url()?>assets/img/profiles/<?=$row['img_name']?>" class=" img-responsive"> </div>
 
                 <div class=" col-md-9 col-lg-9 ">
                   <table class="table table-user-information">
@@ -86,7 +86,8 @@
                     </tbody>
                   </table>
 
-                  <a href="<?=base_url()?>index.php/profile/edit/<?=$user_id;?>" class="btn btn-danger" style='margin-left:364px;'>Edit Profile</a>
+                  <a href="<?=base_url()?>index.php/profile/edit/<?=$user_id;?>" class="btn btn-danger" style='margin-left:220px;'>Edit Profile</a>
+                  <a href="<?=base_url()?>index.php/profile/edit_img/<?=$user_id;?>" class="btn btn-danger">Change Image</a>
                   <!-- <a href="#" class="btn btn-primary">Team Sales Performance</a> -->
                 </div>
               </div>
@@ -95,7 +96,7 @@
                       <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-default">
                       Qualifications
                       </a>
-                    
+
                       <div class='row'>
                           <ul>
                             <?php
@@ -114,7 +115,7 @@
                        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-default">
                        Skills
                        </a>
-                      
+
                        <div class='row'>
                            <ul>
                              <?php

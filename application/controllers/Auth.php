@@ -22,20 +22,20 @@ class Auth extends CI_Controller {
 		}
 
 	}
-	
-	
+
+
 	// User Signup
 	public function signup(){
-		
+
 		if(count($_POST) > 0){
 			$sign_up = $this->Auth_model->createUser($_POST['email'],$_POST['password']);
-			
+
 			$user = $this->Auth_model->authenticate_user($_POST['email'],$_POST['password'])->result_array();
 			print_r($user);
 			if(count($user) > 0 && $user[0]['status'] == 'active'){
-					
+
 					$newProfile = $this->Auth_model->createUserProfile($user[0]['id']);
-					
+
 					$this->session->set_userdata('id', $user[0]['id']);
 					$this->session->set_userdata('email', $user[0]['email']);
 					$this->session->set_userdata('status', $user[0]['status']);
@@ -46,7 +46,7 @@ class Auth extends CI_Controller {
 			else{
 				 header("Location:".base_url()."index.php?error=1");
 			}
-			
+
 		}
 		else{
 			$this->load->view('sign_up_view');
@@ -55,7 +55,7 @@ class Auth extends CI_Controller {
 
   // Login User
 	public function login(){
-		
+
 			$email = $_POST['email'];
 			$password = $_POST['password'];
 

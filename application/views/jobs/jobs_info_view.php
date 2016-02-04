@@ -73,14 +73,27 @@
                       </tr>
                     </tbody>
                   </table>
-				  
+
 				  <a href="#" class="btn btn-primary" style='margin-left:364px;float:right;margin-bottom:10px;'>Total Applicants : <?=count($applicants);?></a>
 				 </br>
 				 <?php if($type == 'applicant') { ?>
-				 <form method='post' action="<?=base_url();?>index.php/jobs/apply_job/<?=$jobId;?>/<?=$appId;?>">
-				  <button class="btn btn-default" type="submit" style='margin-left:364px;float:right' name="action"><span class="glyphicon glyphicon-plus"></span> Apply Job</button>
-				  <!--<a href="#" class="btn btn-primary" style='margin-left:364px;float:right'>Appy Job</a>-->
-				 </form>
+
+         <?php if(count($applicants) == $row['units']) {?>
+          <a href="#" class="btn btn-danger" style='margin-left:364px;float:right;margin-bottom:10px;'>Max Applicant Applied</a>
+         <?php } ?>
+
+         <!-- ZERO -->
+         <?php if($check_if_exist == 1 && count($applicants) < $row['units']) {?>
+				   <a href="#" class="btn btn-success" style='margin-left:364px;float:right;margin-bottom:10px;'>Already Applied</a>
+         <?php } ?>
+
+         <!-- ONE -->
+         <?php if($check_if_exist == 0 && count($applicants) < $row['units'] ) {?>
+        <form method='post' action="<?=base_url();?>index.php/jobs/apply_job/<?=$jobId;?>/<?=$appId;?>">
+         <button class="btn btn-default" type="submit" style='margin-left:364px;float:right' name="action"><span class="glyphicon glyphicon-plus"></span> Apply Job</button>
+         <!--<a href="#" class="btn btn-primary" style='margin-left:364px;float:right'>Appy Job</a>-->
+        </form>
+         <?php } ?>
 				 <?php } ?>
 				  <?php if($type == 'hr') {?>
                   <a href="<?=base_url();?>index.php/jobs/info/<?=$jobId;?>/edit" class="btn btn-danger" style='margin-left:364px;float:right'>Edit Job</a>
@@ -93,7 +106,7 @@
                       <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-default">
                       Qualifications
                       </a>
-                      
+
                       <div class='row'>
                           <ul>
 						    <?php
@@ -110,7 +123,7 @@
                        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-default">
                        Skills
                        </a>
-					   
+
                        <div class='row'>
                            <ul>
 							<?php
@@ -192,7 +205,7 @@
 			if(!empty($uq)) {
 				$result = $this->Job_model->match_maker($jobId,'Q',$uq)->result_array();
 				$i++;
-				
+
 				if(count($result) > 0){
 				  $aT++;
 				}
@@ -209,9 +222,9 @@
 				$aT++;
 			  }
 		  }
-          
+
         }
-		
+
         $percentage_rank = $aT / $jT * 100 .' %';
 
         if($percentage_rank >= 70){
@@ -223,7 +236,7 @@
         if($percentage_rank <= 39){
           echo "<b><span style='color:red;'>";
         }
-		
+
         echo round($percentage_rank,1).'%';
         echo '</span></b>';
 
