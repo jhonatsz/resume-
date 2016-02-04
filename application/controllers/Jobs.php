@@ -436,11 +436,48 @@ class Jobs extends CI_Controller {
 
 	public function notification(){
 
+			$jobId = $this->uri->segment(3);
+			$appId = $this->uri->segment(4);
+
+			$config['protocol'] = 'sendmail';
+	    $config['mailpath'] = '/usr/sbin/sendmail';
+	    $config['charset'] = 'iso-8859-1';
+	    $config['wordwrap'] = TRUE;
+
+    	$this->email->initialize($config);
+	    $this->email->from('resume@klaseko.com', 'Job Mailer');
+      $this->email->to("$mail");
+
+      $this->email->subject('Job Notification');
+      $this->email->message('You have been selected!');
+
+      $this->email->send();
+
+      echo $this->email->print_debugger();
+
 
 	}
 
 	public function verification(){
 
+		$jobId = $this->uri->segment(3);
+		$appId = $this->uri->segment(4);
+
+		$config['protocol'] = 'sendmail';
+		$config['mailpath'] = '/usr/sbin/sendmail';
+		$config['charset'] = 'iso-8859-1';
+		$config['wordwrap'] = TRUE;
+
+		$this->email->initialize($config);
+		$this->email->from('resume@klaseko.com', 'Job Mailer');
+		$this->email->to("$mail");
+
+		$this->email->subject('Application Confirmation');
+		$this->email->message('You have apply to this job!');
+
+		$this->email->send();
+
+		echo $this->email->print_debugger();
 	}
 
 }
