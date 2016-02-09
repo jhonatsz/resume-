@@ -53,12 +53,12 @@
         <div class="col-md-10" >
 
           <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title"><b>Job Title: </b><?=$row['name']?></h3>
+            <div class="panel-heading" style='background-color:#8C0001;'>
+              <h3 class="panel-title" style='color:white;font-weight:bold;'><b>Job Title: </b><?=$row['name']?></h3>
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="Job Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="Job Pic" src="<?=base_url()?>assets/img/seal-logo.png" class="img-square img-responsive"> </div>
 
                 <div class=" col-md-9 col-lg-9 ">
                   <table class="table table-user-information">
@@ -90,7 +90,7 @@
          <!-- ONE -->
          <?php if($check_if_exist == 0 && count($applicants) < $row['units'] ) {?>
         <form method='post' action="<?=base_url();?>index.php/jobs/apply_job/<?=$jobId;?>/<?=$appId;?>">
-         <button class="btn btn-default" type="submit" style='margin-left:364px;float:right' name="action"><span class="glyphicon glyphicon-plus"></span> Apply Job</button>
+         <button onclick="return confirm('Are you sure you want to apply?');" class="btn btn-default" type="submit" style='margin-left:364px;float:right' name="action"><span class="glyphicon glyphicon-plus"></span> Apply Job</button>
          <!--<a href="#" class="btn btn-primary" style='margin-left:364px;float:right'>Appy Job</a>-->
         </form>
          <?php } ?>
@@ -184,19 +184,21 @@
                        <th>Email</th>
                        <th>Contact</th>
                        <?php if($type == 'hr') {?>
-                         <th colspan=2>Action</th>
+                         <th colspan=3>Action</th>
                        <?php } ?>
                      </thead>
       <tbody>
 
-      <?php foreach($applicants as $row) :?>
-
+      <?php foreach($applicants as $row) : //print_r($applicants)?>
+	
       <tr>
       <td><input type="checkbox" class="checkthis" /></td>
       <td>
       <?php
         $jT = count(explode(',',$row['JQ'])) + count(explode(',',$row['JS']));
         $qualification = explode(',',$row['UQ']);
+		array_push($qualification,$row['gender']);
+		//print_r($qualification);
         $skills = explode(',',$row['US']);
         $aT = 0;
 
@@ -250,9 +252,11 @@
 
       <?php if($type == 'hr') {?>
       <td>
-        <p data-placement="top" data-toggle="tooltip" title="Download PDF"><a target='_tab' href='<?=base_url();?>index.php/jobs/view/<?=$jobId;?>/<?=$row['id'];?>'> <button class="btn btn-primary btn-xs" data-title="Download PDF" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-eye-open"></span></button></a></p>
+        <p data-placement="top" data-toggle="tooltip" title="View PDF"><a onclick="return confirm('Are you sure you want to view resume?');" target='_tab' href='<?=base_url();?>index.php/jobs/view/<?=$jobId;?>/<?=$row['id'];?>'> <button class="btn btn-primary btn-xs" data-title="Download PDF" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-eye-open"></span></button></a></p>
       </td>
-      <td><p data-placement="top" data-toggle="tooltip" title="View PDF"><a href='<?=base_url();?>index.php/jobs/download/<?=$jobId;?>/<?=$row['id'];?>'> <button class="btn btn-primary btn-xs" data-title="View PDF" data-toggle="modal" data-target="#delete" ><span class=" glyphicon glyphicon-download-alt"></span></button></a></p></td>
+	  <td><p data-placement="top" data-toggle="tooltip" title="Approve"><a onclick="return confirm('Are you sure you want to approve this applicant?');" href='<?=base_url();?>index.php/jobs/notification/<?=$jobId;?>/<?=$row['id'];?>'> <button class="btn btn-primary btn-xs" data-title="Approve" data-toggle="modal" data-target="#delete" ><span class=" glyphicon glyphicon-ok"></span></button></a></p></td>
+
+      <td><p data-placement="top" data-toggle="tooltip" title="Download PDF"><a onclick="return confirm('Are you sure you want to download resume?');"href='<?=base_url();?>index.php/jobs/download/<?=$jobId;?>/<?=$row['id'];?>'> <button class="btn btn-primary btn-xs" data-title="View PDF" data-toggle="modal" data-target="#delete" ><span class=" glyphicon glyphicon-download-alt"></span></button></a></p></td>
 
       <?php } ?>
       </tr>

@@ -6,7 +6,7 @@
   <link rel='stylesheet' type='text/css' href='<?=base_url();?>assets/css/nav.css'>
   <link rel='stylesheet' type='text/css' href='<?=base_url();?>assets/css/jobs.css'>
   <script type='javascript' src='<?=base_url();?>assets/js/bootstrap.min.js'></script>
-  <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <script type='javascript' src='<?=base_url();?>assets/js/bootstrap.min.js'></script>
 
 </head>
@@ -71,7 +71,7 @@
         <div class="col-sm-4 col-md-4">
             <div class="post">
                 <div class="post-img-content" style='height:150px;'>
-                    <img src="http://placehold.it/460x250/B42828/B42828&text=jQuery" class="img-responsive" />
+                    <img src="<?=base_url();?>assets/img/seal.png" class="img-responsive" />
                     <span class="post-title"><b><?=$row['name'];?></b><br />
                         </span>
                 </div>
@@ -80,7 +80,7 @@
                         By <b>HR Dept</b> |
                         <time datetime="2014-01-20"><?=$row['date_created'];?></time>
                     </div>
-                    <div>
+                    <div class='job-info'>
                         <a href="<?=base_url();?>index.php/jobs/info/<?=$row['id'];?>" class="btn btn-danger btn-sm"> Job Information</a>
                     </div>
                 </div>

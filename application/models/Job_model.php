@@ -37,7 +37,7 @@ class Job_model extends CI_Model {
 	}
 
     function get_job_applicants($jobId=NULL){
-      $applicants = $this->db->query("SELECT users_profile.id, users_profile.fullname, users_profile.lastname,users.email,users_profile.contact_no,users_profile.qualification as UQ,users_profile.skills as US,jobs.qualifications as JQ,jobs.skills as JS FROM jobs_info LEFT JOIN users on users.id=jobs_info.applicant_id LEFT JOIN users_profile on users.id=users_profile.id LEFT JOIN jobs on jobs.id=jobs_info.jobs_id
+      $applicants = $this->db->query("SELECT users_profile.gender,users_profile.id, users_profile.fullname, users_profile.lastname,users.email,users_profile.contact_no,users_profile.qualification as UQ,users_profile.skills as US,jobs.qualifications as JQ,jobs.skills as JS FROM jobs_info LEFT JOIN users on users.id=jobs_info.applicant_id LEFT JOIN users_profile on users.id=users_profile.id LEFT JOIN jobs on jobs.id=jobs_info.jobs_id
         WHERE jobs_id='{$jobId}'");
 
       return $applicants;
@@ -56,10 +56,12 @@ class Job_model extends CI_Model {
 
     function match_maker($jobId,$cat=NULL,$string=NULL){
       if($cat == 'Q'){
-        $result = $this->db->query("SELECT * FROM jobs WHERE id='{$jobId}' AND qualifications LIKE '%{$string}%'");
+        //$result = $this->db->query("SELECT * FROM jobs WHERE id='{$jobId}' AND qualifications LIKE '{$string}'");
+		$result = $this->db->query("SELECT * FROM jobs WHERE MATCH(qualifications) AGAINST('{$string}' IN NATURAL LANGUAGE MODE) AND  id='{$jobId}'");
       }
       if($cat == 'S'){
-        $result = $this->db->query("SELECT * FROM jobs WHERE id='{$jobId}' AND skills LIKE '%{$string}%'");
+        //$result = $this->db->query("SELECT * FROM jobs WHERE id='{$jobId}' AND skills LIKE '{$string}'");
+		$result = $this->db->query("SELECT * FROM jobs WHERE MATCH(skills) AGAINST('{$string}' IN NATURAL LANGUAGE MODE) AND  id='{$jobId}'");
       }
 
       return $result;

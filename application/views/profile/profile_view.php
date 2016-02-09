@@ -2,11 +2,12 @@
 <html>
 <head>
   <title>Resume+ | Profile</title>
+  <link rel='stylesheet' type='text/css' href='<?=base_url();?>assets/css/profile.css'>
   <link rel='stylesheet' type='text/css' href='<?=base_url();?>assets/css/bootstrap.min.css'>
   <link rel='stylesheet' type='text/css' href='<?=base_url();?>assets/css/nav.css'>
-  <link rel='stylesheet' type='text/css' href='<?=base_url();?>assets/css/profile.css'>
   <script type='javascript' src='<?=base_url();?>assets/js/bootstrap.min.js'></script>
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  
 </head>
 <body>
 
@@ -48,9 +49,9 @@
         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2 toppad" >
 
           <?php foreach($user_info as $row ): ?>
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title"><?=$row['fullname']; ?> <?=$row['lastname']; ?></h3>
+          <div class="panel panel-info" >
+            <div class="panel-heading" style='background-color:#8C0001;'>
+              <h3 class="panel-title" style='color:white;font-weight:bold;'><?=$row['fullname']; ?> <?=$row['lastname']; ?></h3>
             </div>
             <div class="panel-body">
               <div class="row">

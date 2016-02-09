@@ -8,7 +8,7 @@ body
     background-color: #FFF;
     overflow: hidden;
     box-shadow: 0 0 1px #CCC;
-}
+}/*
 .post img
 {
     filter: blur(2px);
@@ -17,6 +17,7 @@ body
     -o-filter: blur(2px);
     -ms-filter: blur(2px);
 }
+*/
 .post .content
 {
     padding: 15px;
@@ -42,6 +43,10 @@ body
     vertical-align: bottom;
     z-index: 2;
     position: relative;
+}
+.job-info{
+	z-index:10;
+	position: relative;
 }
 .post .post-title b
 {

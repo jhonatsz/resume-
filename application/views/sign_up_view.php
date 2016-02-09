@@ -8,7 +8,7 @@
 <body>
   <div class="container">
       <div class="row">
-          <div class="col-md-4 col-md-offset-7">
+          <div class="col-md-4 col-md-offset-7" style='margin-left:745px;'>
               <div class="panel panel-default">
                   <div class="panel-heading">
                       <span class="glyphicon glyphicon-lock"></span>Resume+ | Sign Up</div>

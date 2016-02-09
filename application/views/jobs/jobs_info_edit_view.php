@@ -35,7 +35,8 @@
                 </li>
                 <li>
                   <a href="<?=base_url();?>index.php/auth/logout">
-                  <i class="fa fa-users fa-lg"></i> Signout
+                  <i class="fa fa-users fa-lg">
+				  </i> Signout
                   </a>
                 </li>
             </ul>
@@ -97,7 +98,7 @@
             <div class="form-group">
               <div class="col-md-12 text-right">
 			    <button type="submit" class="btn btn-primary btn-lg" style='float:right;'>Submit</button>
-                <a href="<?=base_url();?>index.php/jobs/delete/<?=$jobId;?>" class="btn btn-danger  btn-lg" style='margin-right:10px;margin-left:364px;float:right;margin-bottom:10px;'>Delete</a>
+                <a onclick="return confirm('Are you sure you want to delete this item?');" href="<?=base_url();?>index.php/jobs/delete/<?=$jobId;?>" class="btn btn-danger  btn-lg" style='margin-right:10px;margin-left:364px;float:right;margin-bottom:10px;'>Delete</a>
               </div>
             </div>
           </fieldset>
