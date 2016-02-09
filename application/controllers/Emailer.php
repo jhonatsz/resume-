@@ -9,24 +9,36 @@ class Emailer extends CI_Controller {
   }
 
   public function index(){
+    $subject = 'This is a test';
+    $message = '<p>This message has been sent for testing purposes.</p>';
+    $body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+              <html xmlns="http://www.w3.org/1999/xhtml">
+              <head>
+                  <meta http-equiv="Content-Type" content="text/html; charset='.strtolower(config_item('charset')).'" />
+                  <title>'.html_escape($subject).'</title>
+                  <style type="text/css">
+                      body {
+                          font-family: Arial, Verdana, Helvetica, sans-serif;
+                          font-size: 16px;
+                      }
+                  </style>
+              </head>
+              <body>
+              '.$message.'
+              </body>
+              </html>';
 
-    $config['protocol'] = 'sendmail';
-    $config['mailpath'] = '/usr/sbin/sendmail';
-    $config['charset'] = 'iso-8859-1';
-    $config['wordwrap'] = TRUE;
+          $result = $this->email->from('kaii@klaseko.com','Job Test')
+          //->reply_to('yoursecondemail@somedomain.com')    // Optional, an account where a human being reads.
+          ->to('lcaii.sann@gmail.com')
+          ->subject($subject)
+          ->message($body)
+          ->send();
 
-    $this->email->initialize($config);
-      $this->email->from('your@example.com', 'Your Name');
-      $this->email->to('lcaii.sann@gmail.com');
-      //$this->email->cc('another@another-example.com');
-      //$this->email->bcc('them@their-example.com');
-
-      $this->email->subject('Email Test');
-      $this->email->message('Testing the email class.');
-
-      $this->email->send();
-
+      var_dump($result);
+      echo '<br />';
       echo $this->email->print_debugger();
 
+      //exit;
   }
 }

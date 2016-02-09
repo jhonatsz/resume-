@@ -6,6 +6,11 @@ class Job_model extends CI_Model {
         parent::__construct();
     }
 
+  function getApplicant($appId=NULL){
+    $result = $this->db->query("SELECT * FROM users where id='$appId'");
+    return $result;
+  }
+
   function check_if_exist($jobId=NULL,$appId=NULL){
       $result=$this->db->query("SELECT * FROM jobs_info WHERE jobs_id='$jobId' AND applicant_id='$appId'")->num_rows();
       return $result;

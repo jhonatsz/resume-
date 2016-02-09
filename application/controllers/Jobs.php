@@ -10,6 +10,7 @@ class Jobs extends CI_Controller {
 		$this->load->model('Profile_model');
 		$this->load->library('Pagination');
 		$this->load->library('fpdf_gen');
+		$this->load->library('email');
 	}
 	public function index(){
 		$start=0;
@@ -398,8 +399,25 @@ class Jobs extends CI_Controller {
 	public function apply_job(){
 		$jobId = $this->uri->segment(3);
 		$appId = $this->uri->segment(4);
+		$applicant = $this->Job_model->getApplicant($appId)->result_array();
+		$email = $applicant[0]['email'];
 
 		$add_applicant = $this->Job_model->add_applicant($jobId,$appId);
+		$notify = $this->notification($email);
+
+		header("Location:".base_url()."index.php/jobs/info/{$jobId}");
+	}
+
+	public function approve_applicant(){
+
+		$jobId = $this->uri->segment(3);
+		$appId = $this->uri->segment(4);
+
+		$applicant = $this->Job_model->getApplicant($appId)->result_array();
+		$email = $applicant[0]['email'];
+
+		$add_applicant = $this->Job_model->add_applicant($jobId,$appId);
+		$notify = $this->verification($email);
 
 		header("Location:".base_url()."index.php/jobs/info/{$jobId}");
 	}
@@ -432,52 +450,75 @@ class Jobs extends CI_Controller {
       $pdf -> output ('your_file_pdf.pdf','D');
   }
 
+	public function notification($email=NUL){
 
+			$subject = 'Application Notification';
+	    $message = '<p>This message is to notify that you have applied for this job.</p>';
+	    $body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	              <html xmlns="http://www.w3.org/1999/xhtml">
+	              <head>
+	                  <meta http-equiv="Content-Type" content="text/html; charset='.strtolower(config_item('charset')).'" />
+	                  <title>'.html_escape($subject).'</title>
+	                  <style type="text/css">
+	                      body {
+	                          font-family: Arial, Verdana, Helvetica, sans-serif;
+	                          font-size: 16px;
+	                      }
+	                  </style>
+	              </head>
+	              <body>
+	              '.$message.'
+	              </body>
+	              </html>';
 
-	public function notification(){
+	          $result = $this->email->from('kaii@klaseko.com','Resume+')
+	          //->reply_to('yoursecondemail@somedomain.com')    // Optional, an account where a human being reads.
+	          ->to($email)
+	          ->subject($subject)
+	          ->message($body)
+	          ->send();
 
-		$jobId = $this->uri->segment(3);
-		$appId = $this->uri->segment(4);
+	      var_dump($result);
+	      echo '<br />';
+	      echo $this->email->print_debugger();
 
-		$config['protocol'] = 'sendmail';
-		$config['mailpath'] = '/usr/sbin/sendmail';
-		$config['charset'] = 'iso-8859-1';
-		$config['wordwrap'] = TRUE;
-
-		  $this->email->initialize($config);
-		  $this->email->from('resume@klaseko.com', 'Job Mailer');
-		  $this->email->to("$mail");
-
-		  $this->email->subject('Job Notification');
-		  $this->email->message('You have been selected!');
-
-		  $this->email->send();
-
-      echo $this->email->print_debugger();
-
+	      //exit;
 
 	}
 
-	public function verification(){
+	public function verification($email=NULL){
 
-		$jobId = $this->uri->segment(3);
-		$appId = $this->uri->segment(4);
+		$subject = 'Applicantion Confirmation';
+    $message = '<p>This message is to verify that you are accepted for a job.</p>';
+    $body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+              <html xmlns="http://www.w3.org/1999/xhtml">
+              <head>
+                  <meta http-equiv="Content-Type" content="text/html; charset='.strtolower(config_item('charset')).'" />
+                  <title>'.html_escape($subject).'</title>
+                  <style type="text/css">
+                      body {
+                          font-family: Arial, Verdana, Helvetica, sans-serif;
+                          font-size: 16px;
+                      }
+                  </style>
+              </head>
+              <body>
+              '.$message.'
+              </body>
+              </html>';
 
-		$config['protocol'] = 'sendmail';
-		$config['mailpath'] = '/usr/sbin/sendmail';
-		$config['charset'] = 'iso-8859-1';
-		$config['wordwrap'] = TRUE;
+          $result = $this->email->from('kaii@klaseko.com','Resume+')
+          //->reply_to('yoursecondemail@somedomain.com')    // Optional, an account where a human being reads.
+          ->to($email)
+          ->subject($subject)
+          ->message($body)
+          ->send();
 
-		$this->email->initialize($config);
-		$this->email->from('resume@klaseko.com', 'Job Mailer');
-		$this->email->to("$mail");
+      var_dump($result);
+      echo '<br />';
+      echo $this->email->print_debugger();
 
-		$this->email->subject('Application Confirmation');
-		$this->email->message('You have apply to this job!');
-
-		$this->email->send();
-
-		echo $this->email->print_debugger();
+      //exit;
 	}
 
 }
