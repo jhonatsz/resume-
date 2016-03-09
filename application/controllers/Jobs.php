@@ -416,7 +416,6 @@ class Jobs extends CI_Controller {
 		$applicant = $this->Job_model->getApplicant($appId)->result_array();
 		$email = $applicant[0]['email'];
 
-		$add_applicant = $this->Job_model->add_applicant($jobId,$appId);
 		$notify = $this->verification($email);
 
 		header("Location:".base_url()."index.php/jobs/info/{$jobId}");

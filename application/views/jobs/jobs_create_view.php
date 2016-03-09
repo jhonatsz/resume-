@@ -56,7 +56,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label" for="name">Job Name</label>
               <div class="col-md-9">
-                <input id="name" name="name" type="text" placeholder="Your name"  class="form-control">
+                <input id="name" name="name" type="text" placeholder="Please enter the Job name"  class="form-control">
               </div>
             </div>
 
@@ -72,7 +72,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label" for="message">Qualifications</label>
               <div class="col-md-9">
-                <textarea class="form-control" id="message" name="qualifications" placeholder="Please enter your message here..." rows="5"></textarea>
+                <textarea class="form-control" id="message" name="qualifications" placeholder="Please enter your qualifications for the job here..." rows="5"></textarea>
               </div>
             </div>
 			
@@ -80,7 +80,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label" for="message">Skills</label>
               <div class="col-md-9">
-                <textarea class="form-control" id="message" name="skills" placeholder="Please enter your message here..." rows="5"></textarea>
+                <textarea class="form-control" id="message" name="skills" placeholder="Please enter your skills required here..." rows="5"></textarea>
               </div>
             </div>
 

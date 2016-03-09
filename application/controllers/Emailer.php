@@ -30,7 +30,7 @@ class Emailer extends CI_Controller {
 
           $result = $this->email->from('kaii@klaseko.com','Job Test')
           //->reply_to('yoursecondemail@somedomain.com')    // Optional, an account where a human being reads.
-          ->to('lcaii.sann@gmail.com')
+          ->to('marasiganeugeneee@gmail.com')
           ->subject($subject)
           ->message($body)
           ->send();

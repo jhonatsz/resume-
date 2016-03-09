@@ -57,21 +57,21 @@
             <div class="form-group">
               <label class="col-md-3 control-label" for="name">First Name</label>
               <div class="col-md-9">
-                <input id="name" name="fullname" type="text" placeholder="fullname" value='<?=$row['fullname']?>' class="form-control">
+                <input id="name" name="fullname" type="text" placeholder="fullname" value='<?=$row['fullname']?>' class="form-control" required>
               </div>
             </div>
 			
 			<div class="form-group">
               <label class="col-md-3 control-label" for="name">Last Name</label>
               <div class="col-md-9">
-                <input id="name" name="lastname" type="text" placeholder="lastname" value='<?=$row['lastname']?>' class="form-control">
+                <input id="name" name="lastname" type="text" placeholder="lastname" value='<?=$row['lastname']?>' class="form-control" required>
               </div>
             </div>
 			
 			<div class="form-group">
               <label class="col-md-3 control-label" for="name">Birthday</label>
               <div class="col-md-9">
-                <input id="name" name="birthday" type="text" placeholder="birthday" value='<?=$row['birthday']?>' class="form-control">
+                <input id="name" name="birthday" type="text" placeholder="YYYY-MM-DD" value='<?=$row['birthday']?>' class="form-control">
               </div>
             </div>
 
@@ -85,7 +85,7 @@
 			<div class="form-group">
               <label class="col-md-3 control-label" for="name">Email</label>
               <div class="col-md-9">
-                <input id="name" name="email" type="text" placeholder="Your name" value='<?=$row['email']?>' class="form-control">
+                <input id="name" name="email" type="text" placeholder="Your name" value='<?=$row['email']?>' class="form-control" required>
               </div>
             </div>
 			
@@ -107,7 +107,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label" for="message">Qualifications</label>
               <div class="col-md-9">
-                <textarea class="form-control" id="message" name="qualification" placeholder="Please enter your message here..." rows="5"><?=$row['qualification']?></textarea>
+                <textarea class="form-control" id="message" required name="qualification" placeholder="Please enter your message here..." rows="5"><?=$row['qualification']?></textarea>
               </div>
             </div>
 			
@@ -115,7 +115,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label" for="message">Skills</label>
               <div class="col-md-9">
-                <textarea class="form-control" id="message" name="skills" placeholder="Please enter your message here..." rows="5"><?=$row['skills']?></textarea>
+                <textarea class="form-control" id="message" required name="skills" placeholder="Please enter your message here..." rows="5"><?=$row['skills']?></textarea>
               </div>
             </div>
 			

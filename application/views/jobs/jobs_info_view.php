@@ -254,7 +254,7 @@
       <td>
         <p data-placement="top" data-toggle="tooltip" title="View PDF"><a onclick="return confirm('Are you sure you want to view resume?');" target='_tab' href='<?=base_url();?>index.php/jobs/view/<?=$jobId;?>/<?=$row['id'];?>'> <button class="btn btn-primary btn-xs" data-title="Download PDF" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-eye-open"></span></button></a></p>
       </td>
-	  <td><p data-placement="top" data-toggle="tooltip" title="Approve"><a onclick="return confirm('Are you sure you want to approve this applicant?');" href='<?=base_url();?>index.php/jobs/notification/<?=$jobId;?>/<?=$row['id'];?>'> <button class="btn btn-primary btn-xs" data-title="Approve" data-toggle="modal" data-target="#delete" ><span class=" glyphicon glyphicon-ok"></span></button></a></p></td>
+	  <td><p data-placement="top" data-toggle="tooltip" title="Approve"><a onclick="return confirm('Are you sure you want to approve this applicant?');" href='<?=base_url();?>index.php/jobs/approve_applicant/<?=$jobId;?>/<?=$row['id'];?>'> <button class="btn btn-primary btn-xs" data-title="Approve" data-toggle="modal" data-target="#delete" ><span class=" glyphicon glyphicon-ok"></span></button></a></p></td>
 
       <td><p data-placement="top" data-toggle="tooltip" title="Download PDF"><a onclick="return confirm('Are you sure you want to download resume?');"href='<?=base_url();?>index.php/jobs/download/<?=$jobId;?>/<?=$row['id'];?>'> <button class="btn btn-primary btn-xs" data-title="View PDF" data-toggle="modal" data-target="#delete" ><span class=" glyphicon glyphicon-download-alt"></span></button></a></p></td>
 

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
+-- version 4.1.12
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Feb 04, 2016 at 04:07 PM
--- Server version: 5.5.46-0ubuntu0.14.04.2
--- PHP Version: 5.5.9-1ubuntu4.14
+-- Host: 127.0.0.1
+-- Generation Time: Mar 09, 2016 at 05:26 PM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -37,25 +37,26 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   `status` varchar(12) NOT NULL DEFAULT 'active',
   `date_created` date NOT NULL,
   PRIMARY KEY (`id`),
-  FULLTEXT KEY `name` (`name`,`description`,`qualifications`,`skills`,`achievements`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+  FULLTEXT KEY `name` (`name`,`description`,`qualifications`,`skills`,`achievements`),
+  FULLTEXT KEY `FULLTEXTQ` (`qualifications`),
+  FULLTEXT KEY `UNIQS` (`skills`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `jobs`
 --
 
 INSERT INTO `jobs` (`id`, `name`, `description`, `qualifications`, `skills`, `achievements`, `units`, `status`, `date_created`) VALUES
-(1, 'Software Engineer', 'Lorem Ipsum', '1,2,3,4,5', '1,2,3,4', '1,2,3,4', 1, 'active', '2016-01-23'),
-(2, 'Marketing Lead', 'lorem ipsum', '1,2,3,4', '1,2,3,4', '1,2,3,4', 10, 'active', '2016-01-23'),
-(3, 'Sales Marketing', 'lorem ipsum', '1,2,3,4', '1,2,3,4', '1,2,3,4', 10, 'active', '2016-01-23'),
+(1, 'Software Engineer', 'Lorem Ipsum', 'BS Technology, lala\r\n', 'Android', '1,2,3,4', 1, 'active', '2016-01-23'),
+(2, 'System Analyst Lead', 'lorem ipsum', 'Bachelor of Science in Computer Science,Bachelor of Science in Information Technology', 'Android,C,PHP', '1,2,3,4', 10, 'active', '2016-01-23'),
+(3, 'System Programmer', 'lorem ipsum', 'BSIT,MAED,MSCS,Doctorate', 'Android,C,Java,PHP', '1,2,3,4', 10, 'active', '2016-01-23'),
 (4, 'Accounting Person', 'lorem ipsum', '1,2,3,4', '1,2,3,4', '1,2,3,4', 10, 'active', '2016-01-23'),
 (5, 'Librarian', 'lorem ipsum', '1,2,3,4', '1,2,3,4', '1,2,3,4', 10, 'active', '2016-01-23'),
 (6, 'Technician', 'lorem ipsum', '1,2,3,4', '1,2,3,4', '1,2,3,4', 10, 'active', '2016-01-23'),
-(9, 'CEO', 'asas', '1,2,3', '1,2,3', '', 10, 'active', '0000-00-00'),
-(10, 'CTO', 'qwqwq', '1,1,1', '1,1,1', '', 10, 'active', '0000-00-00'),
-(11, 'CFO', 'A', '1,1,1,1', '1,1,1', '', 10, 'active', '0000-00-00'),
-(12, 'JANITOR', 'asas', '1,2', '1,2', '', 10, 'active', '0000-00-00'),
-(13, 'JOBER', '1as', '1,2', '1,2\r\n', '', 10, 'active', '0000-00-00');
+(9, 'CEO', 'lorem ipsum', '1,2,3', '1,2,3', '', 10, 'active', '0000-00-00'),
+(12, 'JANITOR', 'lorem ipsum', '1,2', '1,2', '', 10, 'active', '0000-00-00'),
+(15, 'Random Job', 'Male', 'BSIT,MAED,MSCS,Doctorate', 'Android,C,JAVA,PHP', '', 10, 'active', '0000-00-00'),
+(17, 'Random Job', '', '', '', '', 10, 'active', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -70,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `jobs_info` (
   `date_created` date NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ` (`jobs_id`,`applicant_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `jobs_info`
@@ -79,7 +80,19 @@ CREATE TABLE IF NOT EXISTS `jobs_info` (
 INSERT INTO `jobs_info` (`id`, `jobs_id`, `applicant_id`, `date_created`) VALUES
 (1, 1, 3, '2016-02-04'),
 (2, 3, 3, '2016-02-04'),
-(3, 2, 3, '2016-02-04');
+(3, 2, 3, '2016-02-04'),
+(4, 2, 1, '2016-02-05'),
+(5, 4, 3, '2016-02-05'),
+(6, 6, 3, '2016-02-05'),
+(7, 5, 1, '2016-02-05'),
+(8, 6, 1, '2016-02-05'),
+(9, 3, 1, '2016-02-09'),
+(10, 2, 11, '2016-02-10'),
+(12, 2, 12, '2016-02-10'),
+(13, 15, 3, '2016-02-10'),
+(14, 15, 14, '2016-02-10'),
+(15, 16, 14, '2016-02-10'),
+(16, 15, 15, '2016-02-10');
 
 -- --------------------------------------------------------
 
@@ -120,21 +133,33 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(32) NOT NULL,
   `password` varchar(64) NOT NULL,
-  `status` varchar(24) NOT NULL,
+  `status` varchar(24) NOT NULL DEFAULT 'active',
   `date_created` datetime NOT NULL,
   `logs` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `status`, `date_created`, `logs`) VALUES
-(1, 'kaii@gmail.com', 'password', 'active', '2016-01-22 01:58:00', '2016-01-22 01:58:00'),
+(1, 'fredo@gmail.com', 'password', 'active', '2016-01-22 01:58:00', '2016-01-22 01:58:00'),
 (2, 'hr1@gmail.com', 'password', 'active', '2016-01-22 04:32:17', '2016-01-22 04:32:17'),
 (3, 'applicant1@gmail.com', 'password', 'active', '2016-01-23 01:03:37', '2016-01-23 01:03:37'),
-(4, 'applicant2@klaseko.com', 'password', 'active', '2016-01-23 01:03:57', '2016-01-23 01:03:57');
+(4, 'applicant2@klaseko.com', 'password', 'active', '2016-01-23 01:03:57', '2016-01-23 01:03:57'),
+(5, 'jin@mara', 'falla', 'active', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, 'jin@mara', 'fallala', 'active', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 'hr3@gmail.com', 'password', 'active', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(8, 'hr5@gmail.com', 'password', 'active', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(9, 'hr6@gmail.com', 'password', 'active', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(10, 'applicant1@gmail.com', 'password', 'active', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(11, 'marasiga@gmail.com', 'paulo14', 'active', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(12, 'eugenepaulomarasigan@yahoo.com', 'paulo14', 'active', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(13, 'eugenepaulomarasigan@yahoo.com', 'pupup', 'active', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(14, 'new@klala', 'palala', 'active', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(15, 'marasiganeugeneee@gmail.com', 'password', 'active', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(16, 'hr1@gmail.com', 'password', 'active', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -164,10 +189,16 @@ CREATE TABLE IF NOT EXISTS `users_profile` (
 --
 
 INSERT INTO `users_profile` (`id`, `img_name`, `fullname`, `lastname`, `birthday`, `gender`, `address`, `type`, `contact_no`, `qualification`, `skills`, `achievements`, `date_created`) VALUES
-(1, '4.jpeg', 'Jhonathan Howard', 'Falcutela', '1990-03-15', 'Male', 'Paranaque City', 'applicant', '09164400851', '1,2,3,4,5', '1,2,3,4', '1,2,3,4', '2016-01-22 04:31:03'),
-(2, '', 'Kaii ', 'Falcutela', '1990-01-05', '', 'Makati City', 'hr', '09164400851', '1,2,3', '1,2,3', '1,2,3,4', '2016-01-22 04:32:44'),
-(3, '', 'Karl', 'Potenciano', '2016-01-03', '', '', 'applicant', '09164400851', '1,2', '1,2,3,4', '1,2,3,4', '2016-01-23 01:04:54'),
-(4, '', 'Francis', 'Borbe', '2016-01-03', '', '6 Teheran', 'applicant', '09164400851', '1', '1', '1,2,3,4', '2016-01-23 01:04:22');
+(1, 'login_background_2.jpeg', 'Linfredo', 'Sorre', '1990-03-15', 'Male', 'Paranaque City', 'applicant', '09164400851', 'Bachelor of Science in Mechanical Engineering,Professional License in Mechanical Engineering', 'Android,C,PHP', '1,2,3,4', '2016-01-22 04:31:03'),
+(2, 'IMG_0417.JPG', 'Eugene', 'Marasigan', '1996-06-14', 'Male', 'Makati City', 'hr', '09164400851', '1,2,3', '1,2,3', '1,2,3,4', '2016-01-22 04:32:44'),
+(3, '', 'Raven ', 'Arellano', '2016-01-03', 'Male', 'Tondo', 'applicant', '09164400851', 'BS Technology,lala', 'Android,C,JAVA,PHP', '1,2,3,4', '2016-01-23 01:04:54'),
+(4, '', 'Mark', 'Francis', '2016-01-03', 'Male', '6 Teheran', 'applicant', '09164400851', '1', '1', '1,2,3,4', '2016-01-23 01:04:22'),
+(9, '', '', '', '0000-00-00', 'Male', '', 'applicant', '', '', '', '', '0000-00-00 00:00:00'),
+(11, '', '', '', '0000-00-00', '', '', 'applicant', '', '', '', '', '0000-00-00 00:00:00'),
+(12, '', '', '', '0000-00-00', '', '', 'applicant', '', '', '', '', '0000-00-00 00:00:00'),
+(13, '', '', '', '0000-00-00', '', '', 'applicant', '', '', '', '', '0000-00-00 00:00:00'),
+(14, '', '', '', '0000-00-00', 'Male', '', 'applicant', '', 'A,B,C,D', 'A,B,C,D', '', '0000-00-00 00:00:00'),
+(15, 'jobs.png', 'Eugene ', 'Marasigan', '1996-06-14', 'Male', 'Cavite', 'applicant', '09178570476', '', '', '', '0000-00-00 00:00:00');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

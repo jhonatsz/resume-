@@ -77,7 +77,7 @@
                 </div>
                 <div class="content" style="padding-top:0px;">
                     <div class="author">
-                        By <b>HR Dept</b> |
+                        <b>Post Date:</b> |
                         <time datetime="2014-01-20"><?=$row['date_created'];?></time>
                     </div>
                     <div class='job-info'>
